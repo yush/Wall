@@ -8,7 +8,7 @@ public class GUICtrl {
 	  public PGraphics screenBuf;
 	  public PGraphics backBuf;
 	  
-	  GUICtrl(Test aTest, PGraphics aBuffer, PGraphics aBackBuffer) {
+	  GUICtrl(Wall aTest, PGraphics aBuffer, PGraphics aBackBuffer) {
 	    ctrlControlP5 = new ControlP5(aTest);
 	    screenBuf = aBuffer;
 	    backBuf = aBackBuffer;
@@ -42,4 +42,13 @@ public class GUICtrl {
 		    ctrlControlP5.addSlider("hwZBuffer",-100,100,0,10,250,80,14).setId(7);
 		  } 
 
+	  public void drawBackground() {
+		    screenBuf.fill(0);
+		    screenBuf.rect(0,0,200,400);
+		    screenBuf.fill(100);
+		    screenBuf.rect(200,0,400,400);
+		    backBuf.background(255);  
+		  }	  
+
 }
+
