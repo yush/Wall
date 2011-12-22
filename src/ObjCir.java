@@ -1,3 +1,5 @@
+import processing.core.PApplet;
+import processing.core.PGraphics;
 import controlP5.ControlP5;
 
 public class ObjCir extends ObjTemplate {
@@ -7,7 +9,8 @@ public class ObjCir extends ObjTemplate {
   /*
   * Constructeur
   */
-  public ObjCir(int tX, int tY, int tRad, ObjHW theParent, ControlP5 tController) {
+  public ObjCir(PApplet aP55, int tX, int tY, int tRad, ObjHW theParent, ControlP5 tController) {
+	super(aP55);
     System.out.println("constructeur ObjCir");
     parent = theParent;
     super.aController = tController;
@@ -16,7 +19,8 @@ public class ObjCir extends ObjTemplate {
     radius = tRad;
   }
   
-  public ObjCir(ObjTemplate anObj) {
+  public ObjCir(PApplet aP55, ObjTemplate anObj) {
+	super(aP55);  
     parent = anObj.parent;
     super.aController =  anObj.aController;
     center.x = (int)anObj.center.x;
@@ -41,11 +45,11 @@ public class ObjCir extends ObjTemplate {
     aBuffer.ellipse(center.x,center.y,radius,radius);
     aBuffer.popStyle();
   } 
-  
+*/  
 // dessine l'Ã©lement
   public void drawIt(PGraphics aBuffer, int contour, int typeBuffer){
     if (typeBuffer ==  1) {
-      aBuffer.fill(color(id));
+      aBuffer.fill(p55.color(id));
     }
     aBuffer.beginDraw();
     aBuffer.noStroke();
@@ -67,7 +71,7 @@ public class ObjCir extends ObjTemplate {
   public int getObjSize() {
      return (int)radius;
   }
-*/
+
 }
   
 

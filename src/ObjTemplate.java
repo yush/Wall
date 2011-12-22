@@ -2,6 +2,7 @@ import controlP5.ControlP5;
 import processing.core.*;
 
 public abstract class ObjTemplate implements Comparable {
+  public PApplet p55;
   public ObjHW parent;
   public PVector center;
   public int id;  //hash key (used by backbuffer)
@@ -14,8 +15,9 @@ public abstract class ObjTemplate implements Comparable {
     isSelected
   */
   
-  ObjTemplate() {
-    id = (int)random(255);
+  ObjTemplate(PApplet aP55) {
+	p55 = aP55;
+    id = (int)p55.random(255);
     center = new PVector();
     center.z = 0;
   }
@@ -44,7 +46,7 @@ public abstract class ObjTemplate implements Comparable {
     vSegment.mult(longueur);
     return vOrtho;
   }
-  
+*/  
   
   public String toString() {
      StringBuilder aStr = new StringBuilder();
@@ -54,7 +56,6 @@ public abstract class ObjTemplate implements Comparable {
     aStr.append(" isSelected:"+ isSelected+"\r\n");
    return aStr.toString(); 
   }
-  */
   
   public int compareTo(Object anObjTemplate) {
     int res=0;
@@ -74,7 +75,7 @@ public abstract class ObjTemplate implements Comparable {
   public abstract void drawIt(PGraphics aBuffer, int contour, int typeBuffer);
   public abstract void toXml(StringBuilder aSB);
   
-  /*
+  
   public ObjTemplate getMyMate() {
     if ( parent.head == this) {
       return parent.queue;
@@ -96,6 +97,7 @@ public abstract class ObjTemplate implements Comparable {
      return res;
   }
   
+  /*
   public void loadParametersUI() {
      parent.theGUICtrl.ctrlControlP5.controller("size").setValue(this.getObjSize());
      parent.theGUICtrl.ctrlControlP5.controller("red").setValue(red(parent.objColor));

@@ -7,8 +7,10 @@ public class ObjLink extends ObjTemplate {
   boolean processed;
   boolean dragged;
   
-  ObjLink(int tX1,int tY1,int tX2,int tY2,int tWeight) {
-    psrc1 = new PVector(tX1, tY1);
+  ObjLink(PApplet aP55, int tX1,int tY1,int tX2,int tY2,int tWeight) {
+	super(aP55);
+    p55 = aP55;
+	psrc1 = new PVector(tX1, tY1);
     psrc2 = new PVector(tX2, tY2);
     weight = tWeight; 
     processed=false;
@@ -31,12 +33,12 @@ public class ObjLink extends ObjTemplate {
     pf3 = PVector.add(pf4, vSegment);
     processed = true;
   }
-  
+*/  
   public void drawIt(PGraphics aBuffer, int contour, int typeBuffer) {
     aBuffer.pushStyle();
-    processCoord(contour);  //TODO: ne recalculer que si necessaire, mais il faut calculer le contour, puis l'interieur
+//    processCoord(contour);  //TODO: ne recalculer que si necessaire, mais il faut calculer le contour, puis l'interieur
     if (typeBuffer ==  1) {
-      aBuffer.fill(color(id));
+      aBuffer.fill(p55.color(id));
     }
     aBuffer.quad(pf1.x, pf1.y, pf2.x, pf2.y, pf3.x, pf3.y, pf4.x, pf4.y);
     aBuffer.popStyle();
@@ -53,8 +55,5 @@ public class ObjLink extends ObjTemplate {
   public void toXml(StringBuilder aSB) {
     
   }
-  
-  */
-  
 }
 

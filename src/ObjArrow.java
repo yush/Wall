@@ -1,3 +1,4 @@
+import controlP5.ControlP5;
 import processing.core.*;
 
 
@@ -7,16 +8,18 @@ public class ObjArrow extends ObjTemplate /*implements Comparable*/ {
 
 	  private PVector _tp1, _tp2, _tp3;
 
-	  ObjArrow(int tX1, int tY1, int aSize, ObjHW theParent, ControlP5 tController) {
-	    System.out.println("constructeur ObjArrow");
+	  ObjArrow(PApplet aP55, int tX1, int tY1, int aSize, ObjHW theParent, ControlP5 tController) {
+	    super(aP55);
+		System.out.println("constructeur ObjArrow");
 	    super.aController = tController;
 	    parent = theParent; 
 	    arrowSize = aSize;
 	  }
 	
 	  
-	  public ObjArrow(ObjTemplate anObj) {
-	    parent = anObj.parent;
+	  public ObjArrow(PApplet aP55, ObjTemplate anObj) {
+		super(aP55);
+		parent = anObj.parent;
 	    super.aController =  anObj.aController;
 	    center.x = (int)anObj.center.x;
 	    center.y = (int)anObj.center.y;
@@ -40,20 +43,21 @@ public class ObjArrow extends ObjTemplate /*implements Comparable*/ {
 	    aVector.mult(tSize/2);
 	    _tp3 = PVector.add(aP2, aVector );
 	  }
-
+*/
 	  public void drawIt(PGraphics aBuffer, int contourWeight, int typeBuffer){
 	    if (typeBuffer ==  1) {
-	      aBuffer.fill(color(id));
+	      aBuffer.fill(p55.color(id));
 	    }
 	    ObjTemplate myMate = getMyMate();    
 	    if (myMate != null) {
-	      processCoord(myMate.center, center, arrowSize+contourWeight);
+//	      processCoord(myMate.center, center, arrowSize+contourWeight);
 	      aBuffer.beginDraw();
 	      aBuffer.noStroke();
 	      aBuffer.triangle(_tp1.x, _tp1.y,_tp2.x, _tp2.y,_tp3.x, _tp3.y);
 	      aBuffer.endDraw();
 	    }
 	  }
+
 	  
 	  public void toXml(StringBuilder aSB) {
 	    aSB.append("<ObjArrow id='"+id+"'>");
@@ -69,7 +73,6 @@ public class ObjArrow extends ObjTemplate /*implements Comparable*/ {
 	  public int getObjSize() {
 	    return arrowSize; 
 	  }
-*/
 }
 
 

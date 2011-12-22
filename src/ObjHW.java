@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import processing.core.PApplet;
 import processing.core.PGraphics;
 import controlP5.ControlP5;
 
@@ -7,12 +8,13 @@ public class ObjHW {
 	  //TODO: z buffer
 	  ControlP5 aController;
 	  PGraphics ptrScreen;
+	  private PApplet p55;
 	  private PGraphics _backBuffer;  //backbuffer a remonter dans objet controlleur (a creer?)
 	  private int selectionWeight= 2;
 	  private int contourWeight= 10;
 	  
 	  public GUICtrl theGUICtrl;
-	  public color objColor;
+	  public int objColor;
 	  //public boolean selected;
 	  public ObjTemplate theSelectedObj;
 	  
@@ -22,17 +24,17 @@ public class ObjHW {
 	  
 	  public ArrayList nodeList;
 	  
-	  ObjHW(GUICtrl tGUICtrl) { 
+	  ObjHW(PApplet aP55, GUICtrl tGUICtrl) { 
 	    theGUICtrl = tGUICtrl;
 	    ptrScreen = tGUICtrl.screenBuf;
 	    _backBuffer = tGUICtrl.backBuf;
 	    aController = tGUICtrl.ctrlControlP5;
 	    nodeList = new ArrayList();
-	    head = new ObjCir(200,200,50, this, aController);
-	    queue = new ObjArrow(200,200,40,this, aController);
+	    head = new ObjCir(p55, 200,200,50, this, aController);
+	    queue = new ObjArrow(p55, 200,200,40,this, aController);
 	    nodeList.add(head);
-	    aLink = new ObjLink(200,200,200,250,10);
-	    objColor = color(255,220,0);
+	    aLink = new ObjLink(p55, 200,200,200,250,10);
+	    objColor = p55.color(255,220,0);
 	    theSelectedObj = null; 
 	  }
 
