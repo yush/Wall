@@ -1,56 +1,54 @@
 import java.util.ArrayList;
+import processing.core.PApplet;
 
 public class ObjHWCollection extends ArrayList {
-	  
+	  public Wall p55;
 	  public GUICtrl tController;
 	  
-	  ObjHWCollection(GUICtrl aGUICtrl) {
+	  ObjHWCollection(Wall aWall, GUICtrl aGUICtrl) {
+	    p55 = aWall;
 	    tController = aGUICtrl;
 	  }
 	  
-	  /*
 	  public String toXml() {
 	    StringBuilder aXml = new StringBuilder();
-	    ObjHW anHWObj;
-	    aXml.append("<HWList numObject=\""+theHWList.size()+"\">");
-	    for(int i=0; i<theHWList.size(); i++) {
-	      anHWObj = (ObjHW)theHWList.get(i);
+	    ObjList anHWObj;
+	    aXml.append("<HWList numObject=\""+this.size()+"\">");
+	    for(int i=0; i<this.size(); i++) {
+	      anHWObj = (ObjList)this.get(i);
 	      anHWObj.xml(aXml);
 	    }
 	    aXml.append("</HWList>");
-	    println(aXml.toString());
+	    System.out.println(aXml.toString());
 	    return aXml.toString(); 
 	  }
 	  
-	  public ObjTemplate getSelectedObject(int x, int y) {
-	    ObjHW aHWObj;
+	  public ObjTemplate getObjectAtPos(int x, int y) {
+	    ObjList aHWObj;
 	    ObjTemplate tObjSelected;
 	    int i;
 	    drawObjInBuffer();
-	    for (i =0; i < theHWList.size(); i++ ) {
-	      aHWObj = (ObjHW)theHWList.get(i);
-	      println("==HWobj "+i);
-	      tObjSelected = aHWObj.isSelected(mouseX,mouseY);
-	      if ( tObjSelected != null ) {
-	        selectedObj = aHWObj.theSelectedObj;     
-	        //selectedObj.loadParametersUI();
-	        return tObjSelected;
+	    for (i =0; i < this.size(); i = i+1 ) {
+	      aHWObj = (ObjList)this.get(i);
+	      System.out.println("==HWobj "+i);
+	      if (aHWObj.isSelected(p55.mouseX,p55.mouseY))
+	      {
+	    	aHWObj.selected = true;
+		    aHWObj.theSelectedObj.loadParametersUI();
+		    p55.selectedObj = aHWObj.theSelectedObj;	        
+	        p55.selectedObjList = aHWObj;
+		    return aHWObj.theSelectedObj;
 	      }
-//	      else {
-//	        aHWObj.setUnselected();
-//	        return null;
-//	      }
 	    }
 	    return null;
 	  }
 	  
 	  public void drawObjInBuffer() {
 	    int i;
-	    ObjHW aHWObj;
-	    for (i =0; i < theHWList.size(); i++ ) {
-	      aHWObj = (ObjHW)theHWList.get(i);
+	    ObjList aHWObj;
+	    for (i =0; i < this.size(); i++ ) {
+	      aHWObj = (ObjList)this.get(i);
 	      aHWObj.drawObjInBuffer();
 	    }        
 	  }
-*/
 	}

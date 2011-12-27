@@ -16,7 +16,6 @@ public class ObjLink extends ObjTemplate {
     processed=false;
   }
   
-  /*
 // determine les coordonnÃ©es du rectangle a partir de 2 points
   private void processCoord(int contour) {
     PVector vOrtho;
@@ -33,10 +32,10 @@ public class ObjLink extends ObjTemplate {
     pf3 = PVector.add(pf4, vSegment);
     processed = true;
   }
-*/  
+  
   public void drawIt(PGraphics aBuffer, int contour, int typeBuffer) {
     aBuffer.pushStyle();
-//    processCoord(contour);  //TODO: ne recalculer que si necessaire, mais il faut calculer le contour, puis l'interieur
+    processCoord(contour);  //TODO: ne recalculer que si necessaire, mais il faut calculer le contour, puis l'interieur
     if (typeBuffer ==  1) {
       aBuffer.fill(p55.color(id));
     }

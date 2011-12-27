@@ -3,11 +3,12 @@ import processing.core.*;
 
 public abstract class ObjTemplate implements Comparable {
   public PApplet p55;
-  public ObjHW parent;
+  public ObjList parent;
   public PVector center;
   public int id;  //hash key (used by backbuffer)
   public ControlP5 aController;
   boolean isSelected=false;
+  public boolean isDragged=false;
   boolean processed=false;
   
   /*
@@ -22,12 +23,12 @@ public abstract class ObjTemplate implements Comparable {
     center.z = 0;
   }
   
-  /*
-  public color getObjColor() {
+  
+  public int getObjColor() {
     return parent.objColor; 
   }
   
-  public void setObjColor(color aColor) {
+  public void setObjColor(int aColor) {
     parent.objColor = aColor; 
   }
     
@@ -46,7 +47,6 @@ public abstract class ObjTemplate implements Comparable {
     vSegment.mult(longueur);
     return vOrtho;
   }
-*/  
   
   public String toString() {
      StringBuilder aStr = new StringBuilder();
@@ -97,23 +97,21 @@ public abstract class ObjTemplate implements Comparable {
      return res;
   }
   
-  /*
   public void loadParametersUI() {
      parent.theGUICtrl.ctrlControlP5.controller("size").setValue(this.getObjSize());
-     parent.theGUICtrl.ctrlControlP5.controller("red").setValue(red(parent.objColor));
-     parent.theGUICtrl.ctrlControlP5.controller("green").setValue(green(parent.objColor));
-     parent.theGUICtrl.ctrlControlP5.controller("blue").setValue(blue(parent.objColor));
+     parent.theGUICtrl.ctrlControlP5.controller("red").setValue(p55.red(parent.objColor));
+     parent.theGUICtrl.ctrlControlP5.controller("green").setValue(p55.green(parent.objColor));
+     parent.theGUICtrl.ctrlControlP5.controller("blue").setValue(p55.blue(parent.objColor));
   }
-  
+ 
   public boolean isAtPos(int x, int y) {
-    color res;
+    int res;
     res = parent.theGUICtrl.backBuf.get(x,y);
-    if (color(id) == res) {
-      println("obj selected");
+    if (p55.color(id) == res) {
+      System.out.println("obj selected");
       return true;
     }
     return false;
   }
-*/
   
 }

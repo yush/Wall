@@ -4,12 +4,12 @@ import controlP5.ControlP5;
 
 public class ObjCir extends ObjTemplate {
   int radius;
-  boolean dragged=false;
+//  boolean dragged=false;
     
   /*
   * Constructeur
   */
-  public ObjCir(PApplet aP55, int tX, int tY, int tRad, ObjHW theParent, ControlP5 tController) {
+  public ObjCir(PApplet aP55, int tX, int tY, int tRad, ObjList theParent, ControlP5 tController) {
 	super(aP55);
     System.out.println("constructeur ObjCir");
     parent = theParent;
@@ -28,7 +28,7 @@ public class ObjCir extends ObjTemplate {
     radius = anObj.getObjSize();
   }
   
-  /*
+  
 //  public void setSelected(boolean tSelected) {
 //    if ((isSelected == true)  && ( isSelected != tSelected)) {
 //      System.out.println("set selected radius:"+radius);
@@ -37,7 +37,7 @@ public class ObjCir extends ObjTemplate {
 //    isSelected = tSelected; 
 //  }
 
-  
+  /*
   private void _drawSelection(PGraphics aBuffer) {
     aBuffer.pushStyle();
     aBuffer.noFill();

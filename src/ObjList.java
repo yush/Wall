@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PGraphics;
 import controlP5.ControlP5;
 
-public class ObjHW {
+public class ObjList {
 	  //TODO: z buffer
 	  ControlP5 aController;
 	  PGraphics ptrScreen;
@@ -15,7 +15,7 @@ public class ObjHW {
 	  
 	  public GUICtrl theGUICtrl;
 	  public int objColor;
-	  //public boolean selected;
+	  public boolean selected;
 	  public ObjTemplate theSelectedObj;
 	  
 	  public ObjTemplate head;
@@ -24,8 +24,9 @@ public class ObjHW {
 	  
 	  public ArrayList nodeList;
 	  
-	  ObjHW(PApplet aP55, GUICtrl tGUICtrl) { 
-	    theGUICtrl = tGUICtrl;
+	  ObjList(PApplet aP55, GUICtrl tGUICtrl) { 
+	    p55 = aP55;
+		theGUICtrl = tGUICtrl;
 	    ptrScreen = tGUICtrl.screenBuf;
 	    _backBuffer = tGUICtrl.backBuf;
 	    aController = tGUICtrl.ctrlControlP5;
@@ -38,7 +39,7 @@ public class ObjHW {
 	    theSelectedObj = null; 
 	  }
 
-	  /*
+	  
 	  public String toString() {
 	    StringBuilder aStr = new StringBuilder();
 	    aStr.append(head.toString());
@@ -46,20 +47,19 @@ public class ObjHW {
 	    return aStr.toString(); 
 	  }
 	  
-	  
 	  private void _drawObj(PGraphics aBuffer, int contourWeight, int typeBuffer) {
 	    
-	    if (head.isSelected) {
-	      head.center.x = mouseX;
-	      head.center.y = mouseY;
+	    if (head.isDragged) {
+	      head.center.x = p55.mouseX;
+	      head.center.y = p55.mouseY;
 	      aLink.processed = false;
 	    }
-	    if (queue.isSelected) {
-	      queue.center.x = mouseX;
-	      queue.center.y = mouseY;
+	    else if (queue.isDragged) {
+	      queue.center.x = p55.mouseX;
+	      queue.center.y = p55.mouseY;
 	      aLink.processed = false;
 	    }
-
+	    
 	    aLink.psrc1.x = head.center.x;
 	    aLink.psrc1.y = head.center.y;   
 	    aLink.psrc2.x = queue.center.x;
@@ -69,16 +69,21 @@ public class ObjHW {
 	    head.drawIt(aBuffer, contourWeight, typeBuffer);
 	    queue.drawIt(aBuffer, contourWeight, typeBuffer);
 	  } 
-	  
+
 	  private ObjTemplate _isSelectedBackBuffer(int x, int y) {
-	    theSelectedObj = null;
+//	    theSelectedObj = null;
 	    drawObjInBuffer();
 	    //on parcourt la liste des composants
 	    if ( head.isAtPos(x,y) ) {
+	      head.isSelected = true;
 	      theSelectedObj = head;
 	    }
 	    else if (queue.isAtPos(x,y)) {
+	      queue.isSelected = true;
 	      theSelectedObj = queue;
+	    }
+	    else {
+	    	theSelectedObj = null;
 	    }
 	    return theSelectedObj;
 	  }
@@ -90,12 +95,13 @@ public class ObjHW {
 	      aBuffer.endDraw(); 
 	  }
 	  
-	  
-	  public ObjTemplate isSelected(int clickX, int clickY) {
-	    return _isSelectedBackBuffer(mouseX, mouseY);
+	  public boolean isSelected(int clickX, int clickY) {
+		_isSelectedBackBuffer(clickX, clickY); 
+	    return (theSelectedObj != null);
 	  }
 	  
-	  public void drawIt(PGraphics aBuffer, color aColor, int typeBuffer) {    
+	  
+	  public void drawIt(PGraphics aBuffer, int aColor, int typeBuffer) {    
 	    aBuffer.beginDraw();  
 	    aBuffer.pushStyle();
 	    aBuffer.noStroke();
@@ -108,14 +114,14 @@ public class ObjHW {
 	  }
 	  
 	  public void drawObj() {
-//	    if (selected) {
-//	      _drawSelection(ptrScreen);
-//	    }
+	    if (selected) {
+	      _drawSelection(ptrScreen);
+	    }
 	    drawIt(ptrScreen, objColor, 0);
 	  }
 	  
 	  public void drawObjInBuffer() {
-	    drawIt(backBuffer, color(255) ,1);
+	    drawIt(theGUICtrl.backBuf, p55.color(255) ,1);
 	  }
 	  
 	  public void setUnselected() {
@@ -123,13 +129,13 @@ public class ObjHW {
 	    queue.isSelected = false;
 	  }
 	  
-//	  public void loadParametersUI() {
-//	     aController.controller("headRadius").setValue(head.getObjSize());
-//	     aController.controller("queueRadius").setValue(queue.getObjSize());
-//	     aController.controller("red").setValue(red(objColor));
-//	     aController.controller("green").setValue(green(objColor));
-//	     aController.controller("blue").setValue(blue(objColor));
-//	  }
+	  public void loadParametersUI() {
+	     aController.controller("headRadius").setValue(head.getObjSize());
+	     aController.controller("queueRadius").setValue(queue.getObjSize());
+	     aController.controller("red").setValue(p55.red(objColor));
+	     aController.controller("green").setValue(p55.green(objColor));
+	     aController.controller("blue").setValue(p55.blue(objColor));
+	  }
 	  
 	  public void xml(StringBuilder tStrXml) {
 	     tStrXml.append("<objHW id='test'>");
@@ -137,5 +143,4 @@ public class ObjHW {
 	     queue.toXml(tStrXml);
 	     tStrXml.append("</objHW>");
 	  }
-	 */ 
 }
