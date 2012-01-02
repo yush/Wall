@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.core.PGraphics;
 import controlP5.ControlP5;
 
-public class ObjCir extends ObjTemplate {
+public class ObjCir extends ObjNode {
   int radius;
 //  boolean dragged=false;
     
@@ -19,7 +19,7 @@ public class ObjCir extends ObjTemplate {
     radius = tRad;
   }
   
-  public ObjCir(PApplet aP55, ObjTemplate anObj) {
+  public ObjCir(PApplet aP55, ObjNode anObj) {
 	super(aP55);  
     parent = anObj.parent;
     super.aController =  anObj.aController;

@@ -4,6 +4,7 @@ import processing.core.PApplet;
 public class ObjHWCollection extends ArrayList {
 	  public Wall p55;
 	  public GUICtrl tController;
+	  public ObjList selectedObj;
 	  
 	  ObjHWCollection(Wall aWall, GUICtrl aGUICtrl) {
 	    p55 = aWall;
@@ -19,30 +20,25 @@ public class ObjHWCollection extends ArrayList {
 	      anHWObj.xml(aXml);
 	    }
 	    aXml.append("</HWList>");
-	    System.out.println(aXml.toString());
 	    return aXml.toString(); 
 	  }
 	  
-	  public ObjTemplate getObjectAtPos(int x, int y) {
-	    ObjList aHWObj;
-	    ObjTemplate tObjSelected;
+	  public ObjNode getObjectAtPos(int x, int y) {
+	    ObjList aObjList;
+	    ObjNode tObjSelected;
 	    int i;
 	    drawObjInBuffer();
 	    for (i =0; i < this.size(); i = i+1 ) {
-	      aHWObj = (ObjList)this.get(i);
+	      aObjList = (ObjList)this.get(i);
 	      System.out.println("==HWobj "+i);
-	      if (aHWObj.isSelected(p55.mouseX,p55.mouseY))
+	      if (aObjList.isSelected(p55.mouseX,p55.mouseY))
 	      {
-	    	aHWObj.selected = true;
-		    aHWObj.theSelectedObj.loadParametersUI();
-		    p55.selectedObj = aHWObj.theSelectedObj;	        
-	        p55.selectedObjList = aHWObj;
-		    return aHWObj.theSelectedObj;
+		    return aObjList.selectedNode;
 	      }
 	    }
 	    return null;
 	  }
-	  
+
 	  public void drawObjInBuffer() {
 	    int i;
 	    ObjList aHWObj;

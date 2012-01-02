@@ -1,6 +1,6 @@
 import processing.core.*;
 
-public class ObjLink extends ObjTemplate {
+public class ObjLink extends ObjNode {
   PVector pf1,pf2,pf3,pf4;    //coordonnÃ©es finale du rectangle
   PVector psrc1, psrc2;    //coordonnÃ©es du segment a suivre
   int weight;

@@ -2,7 +2,7 @@ import controlP5.ControlP5;
 import processing.core.*;
 
 
-public class ObjArrow extends ObjTemplate /*implements Comparable*/ {
+public class ObjArrow extends ObjNode /*implements Comparable*/ {
 	  int arrowSize;
 //	  boolean dragged=false;
 
@@ -17,7 +17,7 @@ public class ObjArrow extends ObjTemplate /*implements Comparable*/ {
 	  }
 	
 	  
-	  public ObjArrow(PApplet aP55, ObjTemplate anObj) {
+	  public ObjArrow(PApplet aP55, ObjNode anObj) {
 		super(aP55);
 		parent = anObj.parent;
 	    super.aController =  anObj.aController;
@@ -47,7 +47,7 @@ public class ObjArrow extends ObjTemplate /*implements Comparable*/ {
 	    if (typeBuffer ==  1) {
 	      aBuffer.fill(p55.color(id));
 	    }
-	    ObjTemplate myMate = getMyMate();    
+	    ObjNode myMate = getMyMate();    
 	    if (myMate != null) {
 	      processCoord(myMate.center, center, arrowSize+contourWeight);
 	      aBuffer.beginDraw();

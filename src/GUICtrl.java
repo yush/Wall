@@ -44,7 +44,7 @@ public class GUICtrl {
 		  } 
 
 	  public void drawBackground() {
-		    screenBuf.fill(0);
+		    screenBuf.fill(100);
 		    screenBuf.rect(0,0,p55.CanvasWidth,p55.CanvasHeight);
 		    screenBuf.fill(100);
 		    screenBuf.rect(0,p55.CanvasWidth,p55.CanvasHeight,p55.CanvasWidth+p55.ToolBarWidth);
@@ -53,51 +53,67 @@ public class GUICtrl {
 
 	  public void dispatchEvent(ControlEvent theEvent) {
 		    ObjList tParent;
-		    if ((p55.selectedObj != null) && theEvent.isController()) {
-		      switch(theEvent.controller().id()) {
-		        case(2):
-		          p55.theHWList.add(new ObjList(p55, this));
-		          break;
-		        case(3):
-		          int redValue = (int)theEvent.controller().value();
-		          p55.selectedObj.setObjColor(p55.color(redValue,
-		        		  						p55.green(p55.selectedObj.getObjColor()),
-		        		  						p55.blue(p55.selectedObj.getObjColor())));
-		          break;
-		        case(4):
-		          int greenValue = (int)theEvent.controller().value();
-		          p55.selectedObj.setObjColor(p55.color(p55.red(p55.selectedObj.getObjColor()),
-		        		  					greenValue,
-		        		  					p55.blue(p55.selectedObj.getObjColor())));
-		          break;
-		        case(5):
-		          int blueValue = (int)theEvent.controller().value();
-		          p55.selectedObj.setObjColor(p55.color(p55.red(p55.selectedObj.getObjColor()),
-		        		  						p55.green(p55.selectedObj.getObjColor()),
-		        		  						blueValue));
-		          break;
-		        case(6):
-		        	p55.theHWList.toString();
-		  	break;
-		  /*
-		        case(7):
-		          selectedObj.queue.center.z = theEvent.controller().value();
-		          break;
-		          */
-		        case(8):
-		        p55.selectedObj.setObjSize((int)theEvent.controller().value());
-		          break;
-		        case(100):
-		          tParent = p55.selectedObj.parent;
-		          tParent.head = new ObjArrow(p55, p55.selectedObj);
-		          break;
-		        case(101):
-		          tParent = p55.selectedObj.parent;
-		          tParent.head = new ObjCir(p55, p55.selectedObj);
-		          break;
-		      }
+		    ObjNode aObjNode;
+		    if ( theEvent.isController()) {
+		      if (p55.selectedNode != null) {
+			      switch(theEvent.controller().id()) {
+			        case(3):
+			          int redValue = (int)theEvent.controller().value();
+			          p55.selectedNode.setObjColor(p55.color(redValue,
+			        		  						p55.green(p55.selectedNode.getObjColor()),
+			        		  						p55.blue(p55.selectedNode.getObjColor())));
+			          break;
+			        case(4):
+			          int greenValue = (int)theEvent.controller().value();
+			          p55.selectedNode.setObjColor(p55.color(p55.red(p55.selectedNode.getObjColor()),
+			        		  					greenValue,
+			        		  					p55.blue(p55.selectedNode.getObjColor())));
+			          break;
+			        case(5):
+			          int blueValue = (int)theEvent.controller().value();
+			          p55.selectedNode.setObjColor(p55.color(p55.red(p55.selectedNode.getObjColor()),
+			        		  						p55.green(p55.selectedNode.getObjColor()),
+			        		  						blueValue));
+			          break;
+			        case(6):
+			        	System.out.print(p55.theHWList.toXml());
+			        	break;
+			        case(8):
+			        p55.selectedNode.setObjSize((int)theEvent.controller().value());
+			          break;
+			          
+			        case(100):
+			          tParent = p55.selectedNode.parent;
+			          aObjNode =  new ObjArrow(p55, p55.selectedNode);
+			          if (tParent.head == p55.selectedNode) {
+			        	  tParent.head = aObjNode;
+			        	  p55.selectedNode = aObjNode; 
+			          } 
+			          else if (tParent.queue == p55.selectedNode) {
+			        	  tParent.queue = aObjNode;
+			        	  p55.selectedNode = aObjNode; 
+			          } 			          
+			          break;
+			          
+			        case(101):
+			          tParent = p55.selectedNode.parent;
+			          aObjNode = new ObjCir(p55, p55.selectedNode);
+			          if (tParent.head == p55.selectedNode) {
+			        	  tParent.head = aObjNode;
+			        	  p55.selectedNode = aObjNode; 			        	  
+			          } 
+			          else if (tParent.queue == p55.selectedNode) {
+			        	  tParent.queue = aObjNode;
+			        	  p55.selectedNode = aObjNode; 			        	  
+			          } 
+			          break;
+			      }
+		    }
+		    if ( theEvent.controller().id() == 2) {
+		      p55.theHWList.add(new ObjList(p55, this));
 		    }
 		  }
+	  }
 
 }
 

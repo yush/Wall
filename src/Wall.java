@@ -14,10 +14,11 @@ public class Wall extends PApplet {
 	public ObjHWCollection theHWList;
 	PGraphics backBuffer;
 	
-	public ObjTemplate selectedObj;
+	public ObjNode selectedNode;
 	public ObjList selectedObjList;
 	
 	public void setup(){ 
+		  frameRate(25);
 		  smooth();
 		  size(CanvasWidth+ToolBarWidth, CanvasHeight*2);
 		  backBuffer = createGraphics(CanvasWidth, CanvasHeight, JAVA2D);
@@ -36,34 +37,50 @@ public class Wall extends PApplet {
 			    anObj = (ObjList)theHWList.get(i);
 			    anObj.drawObj();
 			  }
-			  theHWList.drawObjInBuffer();
-			  image(backBuffer, 0, CanvasHeight);
+		  theHWList.drawObjInBuffer();
+		  image(backBuffer, 0, CanvasHeight);
 	}
 	
 	public void mousePressed() {
-		  ObjList aHWObj;
+		  ObjNode tObjNode;
 //		  lPressed = true;
 		  int i;
 		  if (mouseX < CanvasWidth) {
-			  selectedObj = theHWList.getObjectAtPos(mouseX, mouseY);
-			  if ( selectedObj != null ) {   
-			    selectedObj.isDragged = true;
-				selectedObj.loadParametersUI();
-			  }
+			  tObjNode = theHWList.getObjectAtPos(mouseX, mouseY);
+			  if (tObjNode != null) {
+				  if ( selectedNode != null ) {
+					selectedNode.isDragged = false;
+					selectedNode.isSelected = false;
+					selectedNode.parent.selected = false;
+					selectedNode = null;
+					selectedObjList = null;
+				  }
+				tObjNode.isDragged = true;
+				tObjNode.isSelected = true;
+				tObjNode.parent.selected = true;
+			    selectedNode = tObjNode;
+			    selectedObjList = tObjNode.parent;
+				selectedNode.loadParametersUI();
+			   }
 			  else {
-				selectedObj = null;
-				selectedObjList = null;
-			    System.out.println("no selection");
-			  }
+				if (selectedNode != null) {
+					selectedNode.isDragged = false;
+					selectedNode.isSelected = false;
+					selectedNode.parent.selected = false;
+					selectedNode = null;
+					selectedObjList = null;
+				}
+				System.out.println("no selection");
+			  }			  
 			}
 		}
 
-	public	void mouseReleased() {
+	public void mouseReleased() {
 		  ObjList anObj;
 		  int i=0;
 //		  lPressed = false;
-		  if (selectedObj != null) {
-			  selectedObj.isDragged = false;
+		  if (selectedNode != null) {
+			  selectedNode.isDragged = false;
 		  }
 		}
 
@@ -71,4 +88,10 @@ public class Wall extends PApplet {
 		  aGUICtrl.dispatchEvent(theEvent);
 		}
 
+	public void keyPressed()
+	{
+		if (key == 'q') {
+			exit();
+		}
+	}
 }

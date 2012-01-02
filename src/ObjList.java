@@ -16,10 +16,10 @@ public class ObjList {
 	  public GUICtrl theGUICtrl;
 	  public int objColor;
 	  public boolean selected;
-	  public ObjTemplate theSelectedObj;
+	  public ObjNode selectedNode;
 	  
-	  public ObjTemplate head;
-	  public ObjTemplate queue;
+	  public ObjNode head;
+	  public ObjNode queue;
 	  public ObjLink aLink;
 	  
 	  public ArrayList nodeList;
@@ -36,7 +36,7 @@ public class ObjList {
 	    nodeList.add(head);
 	    aLink = new ObjLink(p55, 200,200,200,250,10);
 	    objColor = p55.color(255,220,0);
-	    theSelectedObj = null; 
+	    selectedNode = null; 
 	  }
 
 	  
@@ -70,22 +70,22 @@ public class ObjList {
 	    queue.drawIt(aBuffer, contourWeight, typeBuffer);
 	  } 
 
-	  private ObjTemplate _isSelectedBackBuffer(int x, int y) {
+	  private ObjNode _isSelectedBackBuffer(int x, int y) {
 //	    theSelectedObj = null;
 	    drawObjInBuffer();
 	    //on parcourt la liste des composants
 	    if ( head.isAtPos(x,y) ) {
 	      head.isSelected = true;
-	      theSelectedObj = head;
+	      selectedNode = head;
 	    }
 	    else if (queue.isAtPos(x,y)) {
 	      queue.isSelected = true;
-	      theSelectedObj = queue;
+	      selectedNode = queue;
 	    }
 	    else {
-	    	theSelectedObj = null;
+	    	selectedNode = null;
 	    }
-	    return theSelectedObj;
+	    return selectedNode;
 	  }
 
 	  private void _drawSelection(PGraphics aBuffer) {
@@ -97,7 +97,7 @@ public class ObjList {
 	  
 	  public boolean isSelected(int clickX, int clickY) {
 		_isSelectedBackBuffer(clickX, clickY); 
-	    return (theSelectedObj != null);
+	    return (selectedNode != null);
 	  }
 	  
 	  
