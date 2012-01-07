@@ -18,7 +18,7 @@ public class Wall extends PApplet {
 	public ObjList selectedObjList;
 	
 	public void setup(){ 
-		  frameRate(25);
+		  frameRate(60);
 		  smooth();
 		  size(CanvasWidth+ToolBarWidth, CanvasHeight*2);
 		  backBuffer = createGraphics(CanvasWidth, CanvasHeight, JAVA2D);
@@ -41,6 +41,13 @@ public class Wall extends PApplet {
 		  image(backBuffer, 0, CanvasHeight);
 	}
 	
+	public void mouseDragged() {
+	  if ( selectedNode != null) {
+		selectedNode.isDragged = true;
+	  }
+	  loop();
+	}
+	
 	public void mousePressed() {
 		  ObjNode tObjNode;
 //		  lPressed = true;
@@ -49,13 +56,13 @@ public class Wall extends PApplet {
 			  tObjNode = theHWList.getObjectAtPos(mouseX, mouseY);
 			  if (tObjNode != null) {
 				  if ( selectedNode != null ) {
-					selectedNode.isDragged = false;
+//					selectedNode.isDragged = false;
 					selectedNode.isSelected = false;
 					selectedNode.parent.selected = false;
 					selectedNode = null;
 					selectedObjList = null;
-				  }
-				tObjNode.isDragged = true;
+				  }				
+//				tObjNode.isDragged = true;
 				tObjNode.isSelected = true;
 				tObjNode.parent.selected = true;
 			    selectedNode = tObjNode;
@@ -73,6 +80,7 @@ public class Wall extends PApplet {
 				System.out.println("no selection");
 			  }			  
 			}
+		  loop();
 		}
 
 	public void mouseReleased() {
@@ -82,6 +90,7 @@ public class Wall extends PApplet {
 		  if (selectedNode != null) {
 			  selectedNode.isDragged = false;
 		  }
+		  noLoop();
 		}
 
 		public void controlEvent(ControlEvent theEvent) {
