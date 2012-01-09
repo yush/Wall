@@ -1,15 +1,34 @@
+import java.io.Serializable;
+
 import controlP5.ControlP5;
 import processing.core.*;
 
-public abstract class ObjNode implements Comparable {
-  public PApplet p55;
-  public ObjList parent;
+public abstract class ObjNode implements Comparable, Serializable {
+  transient public PApplet p55;
+  transient public ObjList parent;
   public PVector center;
   public int id;  //hash key (used by backbuffer)
-  public ControlP5 aController;
-  boolean isSelected=false;
-  public boolean isDragged=false;
-  boolean processed=false;
+  transient public ControlP5 aController;	//TODO: 
+  
+public PVector getCenter() {
+	return center;
+}
+
+public void setCenter(PVector center) {
+	this.center = center;
+}
+
+public int getId() {
+	return id;
+}
+
+public void setId(int id) {
+	this.id = id;
+}
+
+transient boolean isSelected=false;
+  public transient boolean isDragged=false;
+  transient boolean  processed=false;
   
   /*
   TODO

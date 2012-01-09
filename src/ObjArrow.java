@@ -2,11 +2,18 @@ import controlP5.ControlP5;
 import processing.core.*;
 
 
-public class ObjArrow extends ObjNode /*implements Comparable*/ {
+public class ObjArrow extends ObjNode implements Comparable {
 	  int arrowSize;
-//	  boolean dragged=false;
+	
+	public int getArrowSize() {
+		return arrowSize;
+	}
 
-	  private PVector _tp1, _tp2, _tp3;
+	public void setArrowSize(int arrowSize) {
+		this.arrowSize = arrowSize;
+	}
+
+	private transient PVector _tp1, _tp2, _tp3;
 
 	  ObjArrow(PApplet aP55, int tX1, int tY1, int aSize, ObjList theParent, ControlP5 tController) {
 	    super(aP55);

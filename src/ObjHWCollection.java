@@ -6,9 +6,9 @@ public class ObjHWCollection extends ArrayList {
 	  public GUICtrl tController;
 	  public ObjList selectedObj;
 	  
-	  ObjHWCollection(Wall aWall, GUICtrl aGUICtrl) {
+	  ObjHWCollection(Wall aWall) {
 	    p55 = aWall;
-	    tController = aGUICtrl;
+	    tController = p55.aGUICtrl;
 	  }
 	  
 	  public String toXml() {

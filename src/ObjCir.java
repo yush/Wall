@@ -4,12 +4,16 @@ import controlP5.ControlP5;
 
 public class ObjCir extends ObjNode {
   int radius;
-//  boolean dragged=false;
-    
-  /*
-  * Constructeur
-  */
-  public ObjCir(PApplet aP55, int tX, int tY, int tRad, ObjList theParent, ControlP5 tController) {
+
+public int getRadius() {
+	return radius;
+}
+
+public void setRadius(int radius) {
+	this.radius = radius;
+}
+
+public ObjCir(PApplet aP55, int tX, int tY, int tRad, ObjList theParent, ControlP5 tController) {
 	super(aP55);
     System.out.println("constructeur ObjCir");
     parent = theParent;

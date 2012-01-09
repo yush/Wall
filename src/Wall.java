@@ -1,3 +1,9 @@
+
+import java.io.IOException;
+import java.lang.annotation.Inherited;
+
+import com.thoughtworks.xstream.XStream;
+
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import controlP5.*;
@@ -17,16 +23,16 @@ public class Wall extends PApplet {
 	public ObjNode selectedNode;
 	public ObjList selectedObjList;
 	
-	public void setup(){ 
+	public void setup(){
 		  frameRate(60);
 		  smooth();
 		  size(CanvasWidth+ToolBarWidth, CanvasHeight*2);
 		  backBuffer = createGraphics(CanvasWidth, CanvasHeight, JAVA2D);
 		  aGUICtrl = new GUICtrl(this, this.g, backBuffer);
 		  aGUICtrl.createInterface();	
-		  theHWList = new ObjHWCollection(this, aGUICtrl);
+		  theHWList = new ObjHWCollection(this);
 		  theHWList.add(new ObjList(this, aGUICtrl));
-		  stroke(0,0,0);		  
+		  stroke(0,0,0);		
 		} 
 		 
 	public void draw(){
@@ -93,7 +99,7 @@ public class Wall extends PApplet {
 		  noLoop();
 		}
 
-		public void controlEvent(ControlEvent theEvent) {
+		public void controlEvent(ControlEvent theEvent) throws IOException, ClassNotFoundException {
 		  aGUICtrl.dispatchEvent(theEvent);
 		}
 
