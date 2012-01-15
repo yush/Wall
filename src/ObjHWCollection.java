@@ -1,10 +1,17 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
-public class ObjHWCollection extends ArrayList {
-	  public Wall p55;
-	  public GUICtrl tController;
-	  public ObjList selectedObj;
+public class ObjHWCollection extends ArrayList implements Serializable {
+	  transient public Wall p55;
+	  transient public GUICtrl tController;
+	  transient public ObjList selectedObj;
 	  
 	  ObjHWCollection(Wall aWall) {
 	    p55 = aWall;
@@ -46,5 +53,25 @@ public class ObjHWCollection extends ArrayList {
 	      aHWObj = (ObjList)this.get(i);
 	      aHWObj.drawObjInBuffer();
 	    }        
+	  }
+	  
+	  public void serialize(String tFilename) throws IOException {
+			FileOutputStream fichier = new FileOutputStream(tFilename);
+			ObjectOutputStream oos = new ObjectOutputStream(fichier);
+			oos.writeObject(p55.theHWList);
+			oos.close();	    			
+	  }
+	  
+	  public void unserialize(String tFilename) throws IOException, ClassNotFoundException {
+			FileInputStream f = new FileInputStream(tFilename);
+			ObjectInputStream o = new ObjectInputStream(f);
+			ObjHWCollection aColl = (ObjHWCollection)o.readObject();
+			o.close();
+			System.out.println("coll size:" + aColl.size() );
+			p55.theHWList.clear();
+			for(int i=0; i < aColl.size(); i++) {
+				ObjList aListNew = (ObjList)aColl.get(i);
+				p55.theHWList.add(new ObjList(p55, aListNew));					
+			}
 	  }
 	}

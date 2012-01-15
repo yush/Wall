@@ -13,7 +13,7 @@ public void setRadius(int radius) {
 	this.radius = radius;
 }
 
-public ObjCir(PApplet aP55, int tX, int tY, int tRad, ObjList theParent, ControlP5 tController) {
+public ObjCir(Wall aP55, int tX, int tY, int tRad, ObjList theParent, ControlP5 tController) {
 	super(aP55);
     System.out.println("constructeur ObjCir");
     parent = theParent;
@@ -23,7 +23,7 @@ public ObjCir(PApplet aP55, int tX, int tY, int tRad, ObjList theParent, Control
     radius = tRad;
   }
   
-  public ObjCir(PApplet aP55, ObjNode anObj) {
+  public ObjCir(Wall aP55, ObjNode anObj) {
 	super(aP55);  
     parent = anObj.parent;
     super.aController =  anObj.aController;
@@ -50,7 +50,7 @@ public ObjCir(PApplet aP55, int tX, int tY, int tRad, ObjList theParent, Control
     aBuffer.popStyle();
   } 
 */  
-// dessine l'Ã©lement
+// dessine l'�lement
   public void drawIt(PGraphics aBuffer, int contour, int typeBuffer){
     if (typeBuffer ==  1) {
       aBuffer.fill(p55.color(id));

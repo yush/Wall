@@ -1,0 +1,14 @@
+HappyWall in progress.
+
+TODO
+* multi node
+* selection du node le plus petit dans le cas ou il y a superposition
+* modfier la largeur du link
+* regler la largeur du contour?
+
+* iter1: serialization/serialization => OK
+* iter2: sortir les coordonnées
+* iter3: multinode
+* iter4: 
+
+DONE

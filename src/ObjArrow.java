@@ -15,16 +15,18 @@ public class ObjArrow extends ObjNode implements Comparable {
 
 	private transient PVector _tp1, _tp2, _tp3;
 
-	  ObjArrow(PApplet aP55, int tX1, int tY1, int aSize, ObjList theParent, ControlP5 tController) {
+	  ObjArrow(Wall aP55, int tX, int tY, int aSize, ObjList theParent, ControlP5 tController) {
 	    super(aP55);
 		System.out.println("constructeur ObjArrow");
 	    super.aController = tController;
+	    center.x = tX;
+	    center.y = tY;	    
 	    parent = theParent; 
 	    arrowSize = aSize;
 	  }
 	
 	  
-	  public ObjArrow(PApplet aP55, ObjNode anObj) {
+	  public ObjArrow(Wall aP55, ObjNode anObj) {
 		super(aP55);
 		parent = anObj.parent;
 	    super.aController =  anObj.aController;
@@ -63,12 +65,10 @@ public class ObjArrow extends ObjNode implements Comparable {
 	      aBuffer.endDraw();
 	    }
 	  }
-
 	  
 	  public void toXml(StringBuilder aSB) {
 	    aSB.append("<ObjArrow id='"+id+"'>");
 	    aSB.append("<arrowSize>"+arrowSize+"</arrowSize>");
-	    //aSB.append("<position x='"+x+"' y='"+y+"'/>");
 	    aSB.append("</ObjArrow>");
 	  }
 	  

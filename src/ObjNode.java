@@ -4,11 +4,14 @@ import controlP5.ControlP5;
 import processing.core.*;
 
 public abstract class ObjNode implements Comparable, Serializable {
-  transient public PApplet p55;
+  transient public Wall p55;
   transient public ObjList parent;
+  transient public ControlP5 aController;	//TODO: 
+  transient boolean isSelected=false;
+  transient boolean  processed=false;
   public PVector center;
   public int id;  //hash key (used by backbuffer)
-  transient public ControlP5 aController;	//TODO: 
+  public transient boolean isDragged=false;
   
 public PVector getCenter() {
 	return center;
@@ -25,17 +28,8 @@ public int getId() {
 public void setId(int id) {
 	this.id = id;
 }
-
-transient boolean isSelected=false;
-  public transient boolean isDragged=false;
-  transient boolean  processed=false;
   
-  /*
-  TODO
-    isSelected
-  */
-  
-  ObjNode(PApplet aP55) {
+  ObjNode(Wall aP55) {
 	p55 = aP55;
     id = (int)p55.random(255);
     center = new PVector();
@@ -117,15 +111,15 @@ transient boolean isSelected=false;
   }
   
   public void loadParametersUI() {
-     parent.theGUICtrl.ctrlControlP5.controller("size").setValue(this.getObjSize());
-     parent.theGUICtrl.ctrlControlP5.controller("red").setValue(p55.red(parent.objColor));
-     parent.theGUICtrl.ctrlControlP5.controller("green").setValue(p55.green(parent.objColor));
-     parent.theGUICtrl.ctrlControlP5.controller("blue").setValue(p55.blue(parent.objColor));
+     p55.aGUICtrl.ctrlControlP5.controller("size").setValue(this.getObjSize());
+     p55.aGUICtrl.ctrlControlP5.controller("red").setValue(p55.red(parent.objColor));
+     p55.aGUICtrl.ctrlControlP5.controller("green").setValue(p55.green(parent.objColor));
+     p55.aGUICtrl.ctrlControlP5.controller("blue").setValue(p55.blue(parent.objColor));
   }
  
   public boolean isAtPos(int x, int y) {
     int res;
-    res = parent.theGUICtrl.backBuf.get(x,y);
+    res = p55.aGUICtrl.backBuf.get(x,y);
     if (p55.color(id) == res) {
       System.out.println("obj selected");
       return true;

@@ -1,9 +1,4 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
@@ -126,28 +121,17 @@ public class GUICtrl {
 		    }
 		    switch ( theEvent.controller().id() ) {
 	    	case 2:
-	    		p55.theHWList.add(new ObjList(p55, this));
-	    		break;
+	    		p55.theHWList.add(new ObjList(p55));
+	    		break;		    
 	    	case 110:
 	    		System.out.println("save");
 	    		if (p55.selectedNode != null) {
 
-					ObjNode aNode = p55.selectedNode;
-					FileOutputStream fichier = new FileOutputStream("objNode.ser");
-					ObjectOutputStream oos = new ObjectOutputStream(fichier);
-					oos.writeObject(aNode);
-					oos.close();
+	    			p55.theHWList.serialize("wall.ser");
 	    		}
 				break;
 	    	case 111:
-	    		System.out.println("load");
-				FileInputStream f = new FileInputStream("objNode.ser");
-				ObjectInputStream o = new ObjectInputStream(f);
-				ObjCir aObjNew = (ObjCir)o.readObject();
-				o.close();
-
-				//System.out.println("color: " + aObjNew.getObjColor() );
-				System.out.println("size: " + aObjNew.getObjSize()); 	    		
+	    		p55.theHWList.unserialize("wall.ser");
 		    }
 		  }
 	  }

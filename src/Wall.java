@@ -24,14 +24,14 @@ public class Wall extends PApplet {
 	public ObjList selectedObjList;
 	
 	public void setup(){
-		  frameRate(60);
+		  frameRate(30);
 		  smooth();
 		  size(CanvasWidth+ToolBarWidth, CanvasHeight*2);
 		  backBuffer = createGraphics(CanvasWidth, CanvasHeight, JAVA2D);
 		  aGUICtrl = new GUICtrl(this, this.g, backBuffer);
 		  aGUICtrl.createInterface();	
 		  theHWList = new ObjHWCollection(this);
-		  theHWList.add(new ObjList(this, aGUICtrl));
+		  theHWList.add(new ObjList(this));
 		  stroke(0,0,0);		
 		} 
 		 
@@ -51,7 +51,6 @@ public class Wall extends PApplet {
 	  if ( selectedNode != null) {
 		selectedNode.isDragged = true;
 	  }
-	  loop();
 	}
 	
 	public void mousePressed() {
@@ -86,17 +85,14 @@ public class Wall extends PApplet {
 				System.out.println("no selection");
 			  }			  
 			}
-		  loop();
 		}
 
 	public void mouseReleased() {
 		  ObjList anObj;
 		  int i=0;
-//		  lPressed = false;
 		  if (selectedNode != null) {
 			  selectedNode.isDragged = false;
 		  }
-		  noLoop();
 		}
 
 		public void controlEvent(ControlEvent theEvent) throws IOException, ClassNotFoundException {

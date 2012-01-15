@@ -7,7 +7,7 @@ public class ObjLink extends ObjNode {
   boolean processed;
   boolean dragged;
   
-  ObjLink(PApplet aP55, int tX1,int tY1,int tX2,int tY2,int tWeight) {
+  ObjLink(Wall aP55, int tX1,int tY1,int tX2,int tY2,int tWeight) {
 	super(aP55);
     p55 = aP55;
 	psrc1 = new PVector(tX1, tY1);
@@ -16,7 +16,7 @@ public class ObjLink extends ObjNode {
     processed=false;
   }
   
-// determine les coordonnÃ©es du rectangle a partir de 2 points
+// determine les coordonn�es du rectangle a partir de 2 points
   private void processCoord(int contour) {
     PVector vOrtho;
     PVector vSegment = new PVector(psrc2.x-psrc1.x,psrc2.y-psrc1.y,0);
