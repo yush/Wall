@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 
 public class ObjHWCollection extends ArrayList implements Serializable {
+	  transient private int iHash;
 	  transient public Wall p55;
 	  transient public GUICtrl tController;
 	  transient public ObjList selectedObj;
@@ -16,6 +17,7 @@ public class ObjHWCollection extends ArrayList implements Serializable {
 	  ObjHWCollection(Wall aWall) {
 	    p55 = aWall;
 	    tController = p55.aGUICtrl;
+	    iHash = 0;
 	  }
 	  
 	  public String toXml() {
@@ -74,4 +76,10 @@ public class ObjHWCollection extends ArrayList implements Serializable {
 				p55.theHWList.add(new ObjList(p55, aListNew));					
 			}
 	  }
+	  
+	  public int getNewHash() {
+		  iHash++;
+		  return iHash;
+	  }
+	  
 	}

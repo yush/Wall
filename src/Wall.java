@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.lang.annotation.Inherited;
+import java.util.Collections;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -15,13 +16,14 @@ public class Wall extends PApplet {
 	GUICtrl aGUICtrl;
 	int CanvasHeight = 400;
 	int CanvasWidth = 600;
-	int ToolBarWidth = 150;
+	int ToolBarWidth = 0;
 	public boolean lPressed=false;
 	public ObjHWCollection theHWList;
 	PGraphics backBuffer;
 	
 	public ObjNode selectedNode;
 	public ObjList selectedObjList;
+	public int zIndex=0;
 	
 	public void setup(){
 		  frameRate(30);
@@ -39,6 +41,7 @@ public class Wall extends PApplet {
 		  int i;
 		  ObjList anObj;
 		  aGUICtrl.drawBackground();
+		  Collections.sort(theHWList);
 		  for(i=0; i < theHWList.size(); i++) {
 			    anObj = (ObjList)theHWList.get(i);
 			    anObj.drawObj();
@@ -85,19 +88,20 @@ public class Wall extends PApplet {
 				System.out.println("no selection");
 			  }			  
 			}
+		  //loop();
 		}
 
 	public void mouseReleased() {
-		  ObjList anObj;
-		  int i=0;
-		  if (selectedNode != null) {
-			  selectedNode.isDragged = false;
-		  }
-		}
+	  if (selectedNode != null) {
+		  selectedNode.isDragged = false;
+	  }
+	  //noLoop();
+	  //draw();
+	}
 
-		public void controlEvent(ControlEvent theEvent) throws IOException, ClassNotFoundException {
-		  aGUICtrl.dispatchEvent(theEvent);
-		}
+	public void controlEvent(ControlEvent theEvent) throws IOException, ClassNotFoundException {
+	  aGUICtrl.dispatchEvent(theEvent);
+	}
 
 	public void keyPressed()
 	{

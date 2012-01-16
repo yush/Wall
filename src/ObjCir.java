@@ -50,7 +50,7 @@ public ObjCir(Wall aP55, int tX, int tY, int tRad, ObjList theParent, ControlP5 
     aBuffer.popStyle();
   } 
 */  
-// dessine l'élement
+// dessine l'ï¿½lement
   public void drawIt(PGraphics aBuffer, int contour, int typeBuffer){
     if (typeBuffer ==  1) {
       aBuffer.fill(p55.color(id));

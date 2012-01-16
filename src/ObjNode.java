@@ -31,7 +31,7 @@ public void setId(int id) {
   
   ObjNode(Wall aP55) {
 	p55 = aP55;
-    id = (int)p55.random(255);
+    id = p55.theHWList.getNewHash();
     center = new PVector();
     center.z = 0;
   }
@@ -115,6 +115,7 @@ public void setId(int id) {
      p55.aGUICtrl.ctrlControlP5.controller("red").setValue(p55.red(parent.objColor));
      p55.aGUICtrl.ctrlControlP5.controller("green").setValue(p55.green(parent.objColor));
      p55.aGUICtrl.ctrlControlP5.controller("blue").setValue(p55.blue(parent.objColor));
+     p55.aGUICtrl.ctrlControlP5.controller("depth").setValue(p55.selectedObjList.z);
   }
  
   public boolean isAtPos(int x, int y) {

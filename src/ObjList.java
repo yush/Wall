@@ -5,7 +5,7 @@ import processing.core.PApplet;
 import processing.core.PGraphics;
 import controlP5.ControlP5;
 
-public class ObjList implements Serializable {
+public class ObjList implements Serializable, Comparable {
 	  transient ControlP5 aController;
 	  transient PGraphics ptrScreen;
 	  transient private Wall p55;
@@ -20,6 +20,7 @@ public class ObjList implements Serializable {
 	  public ObjNode head;
 	  public ObjNode queue;
 	  transient public ObjLink aLink;
+	  transient public int z;
 
 	public int getObjColor() {
 		return objColor;
@@ -194,4 +195,17 @@ public class ObjList implements Serializable {
 	     queue.toXml(tStrXml);
 	     tStrXml.append("</objHW>");
 	  }
+	  
+	  public int compareTo(Object anObjList) {
+		    int res=0;
+		    ObjList tObj= (ObjList)anObjList;
+		    float zValue = tObj.z;
+		     if ( this.z > zValue) {
+		       res = 1;
+		     }
+		     if ( this.z < zValue) {
+		       res = -1;
+		     }
+		     return res;
+		  }
 }
