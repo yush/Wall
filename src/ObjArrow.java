@@ -69,6 +69,8 @@ public class ObjArrow extends ObjNode implements Comparable {
 	  public void toXml(StringBuilder aSB) {
 	    aSB.append("<ObjArrow id='"+id+"'>");
 	    aSB.append("<arrowSize>"+arrowSize+"</arrowSize>");
+	    aSB.append("<angleOrigin value='"+getAngle()+"' </>");
+	    aSB.append("<distanceOrigin value='"+p55.dist(0, 0, this.center.x, this.center.y) +"' />");
 	    aSB.append("</ObjArrow>");
 	  }
 	  

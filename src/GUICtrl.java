@@ -50,7 +50,9 @@ public class GUICtrl {
 		    // bouton save
 		    ctrlControlP5.addButton("btnSave",128, p55.CanvasWidth+10,280,80,20).setId(110);
 		    ctrlControlP5.addButton("btnLoad",128, p55.CanvasWidth+10,320,80,20).setId(111);
-		  } 
+		    ctrlControlP5.addButton("btnExport",128, p55.CanvasWidth+10,350,80,20).setId(112);
+		  
+	  } 
 
 	  public void drawBackground() {
 		    screenBuf.fill(100);
@@ -132,7 +134,12 @@ public class GUICtrl {
 				break;
 	    	case 111:
 	    		p55.theHWList.unserialize("wall.ser");
+	    		break;
+		    case 112:
+		    	System.out.print(p55.theHWList.toXml());
+		    	break;
 		    }
+
 		  }
 	  }
 

@@ -127,4 +127,9 @@ public void setId(int id) {
     return false;
   }
   
+  public float getAngle() {
+	  float angle = p55.atan2(this.center.y, this.center.x);
+	  return ((angle+(p55.HALF_PI))/p55.PI)*360;
+  }
+  
 }

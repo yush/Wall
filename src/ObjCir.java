@@ -65,6 +65,8 @@ public ObjCir(Wall aP55, int tX, int tY, int tRad, ObjList theParent, ControlP5 
     aSB.append("<ObjCir id='"+id+"'>");
     aSB.append("<radius>"+radius+"</radius>");
     aSB.append("<position x='"+center.x+"' y='"+center.y+"'/>");
+    aSB.append("<angleOrigin value='"+getAngle()+"' </>");
+    aSB.append("<distanceOrigin value='"+p55.dist(0, 0, this.center.x, this.center.y) +"' />");
     aSB.append("</ObjCir>");
   }
   

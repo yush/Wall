@@ -123,7 +123,6 @@ public class ObjList implements Serializable {
 	  } 
 
 	  private ObjNode _isSelectedBackBuffer(int x, int y) {
-//	    theSelectedObj = null;
 	    drawObjInBuffer();
 	    //on parcourt la liste des composants
 	    if ( head.isAtPos(x,y) ) {
